@@ -35,5 +35,7 @@ namespace Motos_Motores.Models
         [DataType(DataType.PhoneNumber)]
         public string Telefono { get; set; }
 
+        public ICollection<Venta> ventas { get; set; }
+
     }
 }

@@ -226,6 +226,8 @@ namespace Motos_Motores.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdProducto");
+
                     b.ToTable("Inventarios");
                 });
 
@@ -246,8 +248,6 @@ namespace Motos_Motores.Data.Migrations
                     b.Property<string>("NombreProducto")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<int>("StockProducto");
 
                     b.HasKey("Id");
 
@@ -279,6 +279,33 @@ namespace Motos_Motores.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Proveedores");
+                });
+
+            modelBuilder.Entity("Motos_Motores.Models.Venta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cantidad")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.Property<int>("IdCliente");
+
+                    b.Property<int>("IdProducto");
+
+                    b.Property<int>("Total");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("Venta");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -326,11 +353,32 @@ namespace Motos_Motores.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Motos_Motores.Models.Inventario", b =>
+                {
+                    b.HasOne("Motos_Motores.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Motos_Motores.Models.Producto", b =>
                 {
                     b.HasOne("Motos_Motores.Models.Proveedor", "Proveedor")
                         .WithMany("Producto")
                         .HasForeignKey("IdProveedor")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Motos_Motores.Models.Venta", b =>
+                {
+                    b.HasOne("Motos_Motores.Models.Cliente", "Cliente")
+                        .WithMany("ventas")
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Motos_Motores.Models.Producto", "Producto")
+                        .WithMany("Ventas")
+                        .HasForeignKey("IdProducto")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

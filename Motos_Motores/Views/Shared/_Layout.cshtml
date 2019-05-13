@@ -29,13 +29,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a></li>
+
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Proveedores" asp-action="Index">Proveedores</a></li>
+
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Ventas" asp-action="Index">Ventas</a></li>
+
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Inventario" asp-action="Index">Inventario</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+
+                        }
+
+
+                        </ul>
                 </div>
             </div>
         </nav>

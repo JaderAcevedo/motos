@@ -32,6 +32,7 @@ namespace Motos_Motores.Models
         [Display(Name = "Costo Del Producto")]
         public int CostoProducto { get; set; }
 
+        public ICollection<Venta> Ventas { get; set; }
        
     }
 }
