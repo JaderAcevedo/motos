@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Motos_Motores.Data;
 
-namespace Motos_Motores.Data.Migrations
+namespace Motos_Motores.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190513145857_Modelventas")]
-    partial class Modelventas
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,7 +214,7 @@ namespace Motos_Motores.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Motos_Motores.Models.Inventario", b =>
+            modelBuilder.Entity("Motos_Motores.Models.Compra", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +226,9 @@ namespace Motos_Motores.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Inventarios");
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("Compras");
                 });
 
             modelBuilder.Entity("Motos_Motores.Models.Producto", b =>
@@ -291,15 +291,11 @@ namespace Motos_Motores.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<DateTime>("Fecha")
-                        .HasMaxLength(50);
+                    b.Property<DateTime>("Fecha");
 
-                    b.Property<int>("IdCliente")
-                        .HasMaxLength(50);
+                    b.Property<int>("IdCliente");
 
-                    b.Property<string>("Producto")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<int>("IdProducto");
 
                     b.Property<int>("Total");
 
@@ -307,7 +303,9 @@ namespace Motos_Motores.Data.Migrations
 
                     b.HasIndex("IdCliente");
 
-                    b.ToTable("Venta");
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("Ventas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -355,6 +353,14 @@ namespace Motos_Motores.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Motos_Motores.Models.Compra", b =>
+                {
+                    b.HasOne("Motos_Motores.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Motos_Motores.Models.Producto", b =>
                 {
                     b.HasOne("Motos_Motores.Models.Proveedor", "Proveedor")
@@ -366,8 +372,13 @@ namespace Motos_Motores.Data.Migrations
             modelBuilder.Entity("Motos_Motores.Models.Venta", b =>
                 {
                     b.HasOne("Motos_Motores.Models.Cliente", "Cliente")
-                        .WithMany()
+                        .WithMany("ventas")
                         .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Motos_Motores.Models.Producto", "Producto")
+                        .WithMany("Ventas")
+                        .HasForeignKey("IdProducto")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

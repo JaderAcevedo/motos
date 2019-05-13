@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Motos_Motores.Models
 {
-    public class Inventario
+    public class Compra
     {
         public int Id { get; set; }
 

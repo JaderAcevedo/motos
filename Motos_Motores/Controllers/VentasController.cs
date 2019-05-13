@@ -24,7 +24,7 @@ namespace Motos_Motores.Controllers
         // GET: Ventas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Venta.Include(v => v.Cliente).Include(v => v.Producto);
+            var applicationDbContext = _context.Ventas.Include(v => v.Cliente).Include(v => v.Producto);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace Motos_Motores.Controllers
                 return NotFound();
             }
 
-            var venta = await _context.Venta
+            var venta = await _context.Ventas
                 .Include(v => v.Cliente)
                 .Include(v => v.Producto)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -82,7 +82,7 @@ namespace Motos_Motores.Controllers
                 return NotFound();
             }
 
-            var venta = await _context.Venta.FindAsync(id);
+            var venta = await _context.Ventas.FindAsync(id);
             if (venta == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace Motos_Motores.Controllers
                 return NotFound();
             }
 
-            var venta = await _context.Venta
+            var venta = await _context.Ventas
                 .Include(v => v.Cliente)
                 .Include(v => v.Producto)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -154,15 +154,15 @@ namespace Motos_Motores.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var venta = await _context.Venta.FindAsync(id);
-            _context.Venta.Remove(venta);
+            var venta = await _context.Ventas.FindAsync(id);
+            _context.Ventas.Remove(venta);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VentaExists(int id)
         {
-            return _context.Venta.Any(e => e.Id == id);
+            return _context.Ventas.Any(e => e.Id == id);
         }
     }
 }

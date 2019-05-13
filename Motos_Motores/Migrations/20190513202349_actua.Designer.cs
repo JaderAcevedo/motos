@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Motos_Motores.Data;
 
-namespace Motos_Motores.Data.Migrations
+namespace Motos_Motores.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190513144725_venta")]
-    partial class venta
+    [Migration("20190513202349_actua")]
+    partial class actua
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -216,7 +216,7 @@ namespace Motos_Motores.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Motos_Motores.Models.Inventario", b =>
+            modelBuilder.Entity("Motos_Motores.Models.Compra", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -228,7 +228,9 @@ namespace Motos_Motores.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Inventarios");
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("Compras");
                 });
 
             modelBuilder.Entity("Motos_Motores.Models.Producto", b =>
@@ -281,6 +283,33 @@ namespace Motos_Motores.Data.Migrations
                     b.ToTable("Proveedores");
                 });
 
+            modelBuilder.Entity("Motos_Motores.Models.Venta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cantidad")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.Property<int>("IdCliente");
+
+                    b.Property<int>("IdProducto");
+
+                    b.Property<int>("Total");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("Ventas");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -326,11 +355,32 @@ namespace Motos_Motores.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Motos_Motores.Models.Compra", b =>
+                {
+                    b.HasOne("Motos_Motores.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Motos_Motores.Models.Producto", b =>
                 {
                     b.HasOne("Motos_Motores.Models.Proveedor", "Proveedor")
                         .WithMany("Producto")
                         .HasForeignKey("IdProveedor")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Motos_Motores.Models.Venta", b =>
+                {
+                    b.HasOne("Motos_Motores.Models.Cliente", "Cliente")
+                        .WithMany("ventas")
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Motos_Motores.Models.Producto", "Producto")
+                        .WithMany("Ventas")
+                        .HasForeignKey("IdProducto")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

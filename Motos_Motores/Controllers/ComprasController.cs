@@ -10,23 +10,23 @@ using Motos_Motores.Models;
 
 namespace Motos_Motores.Controllers
 {
-    public class InventariosController : Controller
+    public class ComprasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public InventariosController(ApplicationDbContext context)
+        public ComprasController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Inventarios
+        // GET: Compras
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Inventarios.Include(i => i.Producto);
+            var applicationDbContext = _context.Compras.Include(c => c.Producto);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Inventarios/Details/5
+        // GET: Compras/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace Motos_Motores.Controllers
                 return NotFound();
             }
 
-            var inventario = await _context.Inventarios
-                .Include(i => i.Producto)
+            var compra = await _context.Compras
+                .Include(c => c.Producto)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (inventario == null)
+            if (compra == null)
             {
                 return NotFound();
             }
 
-            return View(inventario);
+            return View(compra);
         }
 
-        // GET: Inventarios/Create
+        // GET: Compras/Create
         public IActionResult Create()
         {
             ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion");
             return View();
         }
 
-        // POST: Inventarios/Create
+        // POST: Compras/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdProducto,Cantidad")] Inventario inventario)
+        public async Task<IActionResult> Create([Bind("Id,IdProducto,Cantidad")] Compra compra)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(inventario);
+                _context.Add(compra);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", inventario.IdProducto);
-            return View(inventario);
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", compra.IdProducto);
+            return View(compra);
         }
 
-        // GET: Inventarios/Edit/5
+        // GET: Compras/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace Motos_Motores.Controllers
                 return NotFound();
             }
 
-            var inventario = await _context.Inventarios.FindAsync(id);
-            if (inventario == null)
+            var compra = await _context.Compras.FindAsync(id);
+            if (compra == null)
             {
                 return NotFound();
             }
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", inventario.IdProducto);
-            return View(inventario);
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", compra.IdProducto);
+            return View(compra);
         }
 
-        // POST: Inventarios/Edit/5
+        // POST: Compras/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProducto,Cantidad")] Inventario inventario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProducto,Cantidad")] Compra compra)
         {
-            if (id != inventario.Id)
+            if (id != compra.Id)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace Motos_Motores.Controllers
             {
                 try
                 {
-                    _context.Update(inventario);
+                    _context.Update(compra);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InventarioExists(inventario.Id))
+                    if (!CompraExists(compra.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace Motos_Motores.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", inventario.IdProducto);
-            return View(inventario);
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", compra.IdProducto);
+            return View(compra);
         }
 
-        // GET: Inventarios/Delete/5
+        // GET: Compras/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace Motos_Motores.Controllers
                 return NotFound();
             }
 
-            var inventario = await _context.Inventarios
-                .Include(i => i.Producto)
+            var compra = await _context.Compras
+                .Include(c => c.Producto)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (inventario == null)
+            if (compra == null)
             {
                 return NotFound();
             }
 
-            return View(inventario);
+            return View(compra);
         }
 
-        // POST: Inventarios/Delete/5
+        // POST: Compras/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var inventario = await _context.Inventarios.FindAsync(id);
-            _context.Inventarios.Remove(inventario);
+            var compra = await _context.Compras.FindAsync(id);
+            _context.Compras.Remove(compra);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InventarioExists(int id)
+        private bool CompraExists(int id)
         {
-            return _context.Inventarios.Any(e => e.Id == id);
+            return _context.Compras.Any(e => e.Id == id);
         }
     }
 }

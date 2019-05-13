@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Motos_Motores.Data.Migrations
+namespace Motos_Motores.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class actua : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,39 @@ namespace Motos_Motores.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    NombreCliente = table.Column<string>(maxLength: 50, nullable: false),
+                    ApellidoCliente = table.Column<string>(maxLength: 50, nullable: false),
+                    Sexo = table.Column<string>(maxLength: 50, nullable: false),
+                    Direccion = table.Column<string>(maxLength: 50, nullable: false),
+                    Telefono = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Proveedores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    NombreEmpresa = table.Column<string>(maxLength: 50, nullable: false),
+                    NombreVendedor = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Telefono = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Proveedores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +186,77 @@ namespace Motos_Motores.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Productos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    NombreProducto = table.Column<string>(maxLength: 50, nullable: false),
+                    Descripcion = table.Column<string>(maxLength: 50, nullable: false),
+                    IdProveedor = table.Column<int>(nullable: false),
+                    CostoProducto = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Productos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Productos_Proveedores_IdProveedor",
+                        column: x => x.IdProveedor,
+                        principalTable: "Proveedores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Compras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdProducto = table.Column<int>(nullable: false),
+                    Cantidad = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Compras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Compras_Productos_IdProducto",
+                        column: x => x.IdProducto,
+                        principalTable: "Productos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ventas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    IdCliente = table.Column<int>(nullable: false),
+                    IdProducto = table.Column<int>(nullable: false),
+                    Cantidad = table.Column<string>(maxLength: 50, nullable: false),
+                    Total = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ventas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ventas_Clientes_IdCliente",
+                        column: x => x.IdCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ventas_Productos_IdProducto",
+                        column: x => x.IdProducto,
+                        principalTable: "Productos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +295,26 @@ namespace Motos_Motores.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Compras_IdProducto",
+                table: "Compras",
+                column: "IdProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Productos_IdProveedor",
+                table: "Productos",
+                column: "IdProveedor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ventas_IdCliente",
+                table: "Ventas",
+                column: "IdCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ventas_IdProducto",
+                table: "Ventas",
+                column: "IdProducto");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,10 +335,25 @@ namespace Motos_Motores.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Compras");
+
+            migrationBuilder.DropTable(
+                name: "Ventas");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Productos");
+
+            migrationBuilder.DropTable(
+                name: "Proveedores");
         }
     }
 }
