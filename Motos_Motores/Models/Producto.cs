@@ -32,11 +32,6 @@ namespace Motos_Motores.Models
         [Display(Name = "Costo Del Producto")]
         public int CostoProducto { get; set; }
 
-        [Required(ErrorMessage = "El Stock Del Producto es requerido")]
-        [Display(Name = "Stock Del Producto")]
-        public int StockProducto { get; set; }
-
-
-
+       
     }
 }
