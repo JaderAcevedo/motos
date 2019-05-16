@@ -48,7 +48,7 @@ namespace Motos_Motores.Controllers
         // GET: Compras/Create
         public IActionResult Create()
         {
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion");
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "NombreProducto");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Motos_Motores.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", compra.IdProducto);
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "NombreProducto", compra.IdProducto);
             return View(compra);
         }
 
@@ -82,7 +82,7 @@ namespace Motos_Motores.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", compra.IdProducto);
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "NombreProducto", compra.IdProducto);
             return View(compra);
         }
 
@@ -118,7 +118,7 @@ namespace Motos_Motores.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "Descripcion", compra.IdProducto);
+            ViewData["IdProducto"] = new SelectList(_context.Productos, "Id", "NombreProducto", compra.IdProducto);
             return View(compra);
         }
 

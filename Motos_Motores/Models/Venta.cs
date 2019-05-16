@@ -29,8 +29,7 @@ namespace Motos_Motores.Models
 
         [Required(ErrorMessage = "La cantidad es requerido")]
         [Display(Name = "Cantidad")]
-        [MaxLength(50)]
-        public String Cantidad { get; set; }
+        public int Cantidad { get; set; }
 
         [Required(ErrorMessage = "el total es requerido")]
         [Display(Name = "Total")]

@@ -287,9 +287,7 @@ namespace Motos_Motores.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cantidad")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<int>("Cantidad");
 
                     b.Property<DateTime>("Fecha");
 

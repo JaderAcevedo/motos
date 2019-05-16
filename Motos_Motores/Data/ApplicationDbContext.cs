@@ -24,6 +24,9 @@ namespace Motos_Motores.Data
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Compra> Compras { get; set; }
         public DbSet<Venta> Ventas { get; set; }
+        public DbSet<Inventario> Inventarios { get; set; }
+
+       
     }
 
 }

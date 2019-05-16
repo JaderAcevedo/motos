@@ -50,7 +50,7 @@ namespace Motos_Motores.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "Email");
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "NombreEmpresa");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace Motos_Motores.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "Email", producto.IdProveedor);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "NombreEmpresa", producto.IdProveedor);
             return View(producto);
         }
 
@@ -84,7 +84,7 @@ namespace Motos_Motores.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "Email", producto.IdProveedor);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "NombreEmpresa", producto.IdProveedor);
             return View(producto);
         }
 
@@ -120,7 +120,7 @@ namespace Motos_Motores.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "Email", producto.IdProveedor);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "Id", "NombreEmpresa", producto.IdProveedor);
             return View(producto);
         }
 

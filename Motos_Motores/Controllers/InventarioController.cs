@@ -19,7 +19,10 @@ namespace Motos_Motores.Controllers
         }
         public IActionResult Index()
         {
-            var Data = _context.Ventas.ToList();
+            var DataVentas = _context.Ventas.GroupBy(x => x.Producto).ToList();
+            var DataCompras = _context.Compras.ToList();
+            //var Data = 
+           
 
             return View();
         }
