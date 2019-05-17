@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Motos_Motores.Models;
 
 namespace Motos_Motores.Controllers
 {
+    [Authorize]
     public class InventariosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -54,7 +56,7 @@ namespace Motos_Motores.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProducto,Saldo")] Inventario inventario)
+        public async Task<IActionResult> Create([Bind("IdProducto,NombreProducto,Compras,Ventas,Saldo")] Inventario inventario)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +88,7 @@ namespace Motos_Motores.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,Saldo")] Inventario inventario)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,NombreProducto,Compras,Ventas,Saldo")] Inventario inventario)
         {
             if (id != inventario.IdProducto)
             {

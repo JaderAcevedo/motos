@@ -10,9 +10,10 @@ namespace Motos_Motores.Models
     {
         [Key]
         public int IdProducto { get; set; }
+        public string NombreProducto { get; set; }
+        public int Compras { get; set; }
+        public int Ventas { get; set; }
         public int Saldo { get; set; }
-
-
 
     }
 }

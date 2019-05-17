@@ -14,6 +14,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdProducto" />
             <div class="form-group">
+                <label asp-for="NombreProducto" class="control-label"></label>
+                <input asp-for="NombreProducto" class="form-control" />
+                <span asp-validation-for="NombreProducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Compras" class="control-label"></label>
+                <input asp-for="Compras" class="form-control" />
+                <span asp-validation-for="Compras" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ventas" class="control-label"></label>
+                <input asp-for="Ventas" class="form-control" />
+                <span asp-validation-for="Ventas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Saldo" class="control-label"></label>
                 <input asp-for="Saldo" class="form-control" />
                 <span asp-validation-for="Saldo" class="text-danger"></span>
