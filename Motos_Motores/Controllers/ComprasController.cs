@@ -57,7 +57,7 @@ namespace Motos_Motores.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdProducto,Cantidad")] Compra compra)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,IdProducto,Cantidad")] Compra compra)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace Motos_Motores.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdProducto,Cantidad")] Compra compra)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,IdProducto,Cantidad")] Compra compra)
         {
             if (id != compra.Id)
             {

@@ -11,6 +11,10 @@ namespace Motos_Motores.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "La Fecha es requerido")]
+        [Display(Name = "Fecha De La Compra")]
+        public DateTime Fecha { get; set; }
+        
         [ForeignKey("Producto")]
         [Display(Name = "Producto")]
         public int IdProducto { get; set; }

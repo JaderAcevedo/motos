@@ -19,11 +19,6 @@ C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcor
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Clientes\Details.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Clientes\Edit.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Clientes\Index.g.cshtml.cs
-C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Create.g.cshtml.cs
-C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Delete.g.cshtml.cs
-C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Details.g.cshtml.cs
-C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Edit.g.cshtml.cs
-C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Index.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Productos\Create.g.cshtml.cs
@@ -60,3 +55,8 @@ C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcor
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Inventarios\Details.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Inventarios\Edit.g.cshtml.cs
 C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Inventarios\Index.g.cshtml.cs
+C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Create.g.cshtml.cs
+C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Delete.g.cshtml.cs
+C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Details.g.cshtml.cs
+C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Edit.g.cshtml.cs
+C:\Users\jader.acevedo\source\repos\Motos_Motores\Motos_Motores\obj\Debug\netcoreapp2.2\Razor\Views\Compras\Index.g.cshtml.cs
